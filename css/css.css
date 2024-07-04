@@ -2,15 +2,44 @@
     text-align: center;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure the container takes up at least the full viewport height */
+  margin: 10px;
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #6e0f7e;
+  background-color: purple;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+.logo {
+  text-align: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin-bottom: 40px; /* Add a large gap below the logo */
+}
+.roof {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid white;
+  margin: 0 auto;
+}
+.company-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+.tagline {
+  font-size: 16px;
+  font-style: italic;
+  margin-bottom: 20px;
 }
 
 .container {
@@ -41,11 +70,17 @@ body {
   gap: 10px;
 }
 
+.image-item {
+  position: relative;
+  cursor: pointer;
+}
+
 .image-item img {
   width: 100%;
   border-radius: 5px;
-  height: 100%;
+  height: auto; /* Adjust the height as needed */
   object-fit: cover;
+  display: block; /* Display as block element */
 }
 
 @media only screen and (min-width: 768px) {
@@ -81,3 +116,49 @@ body {
 .image-item:hover .overlay {
   transform: scale(1);
 }
+
+/* styles.css */
+
+.sticky-menu {
+  position: fixed;
+  top: -100px; /* Initially hide the menu above the viewport */
+  left: 0;
+  width: 100%;
+  background-color: #f0f0f0; /* Light gray background */
+  color: #333; /* Dark gray text color */
+  padding: 10px 0;
+  z-index: 1000; /* Ensure it appears above other content */
+  transition: top 0.3s ease; /* Add smooth transition effect */
+}
+
+.sticky-menu.show {
+  top: 0; /* Show the menu when scrolled to the top */
+}
+
+.sticky-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Center the menu items horizontally */
+}
+
+.sticky-menu li {
+  margin-right: 20px;
+}
+
+.sticky-menu a {
+  text-decoration: none;
+  color: #333; /* Dark gray link color */
+  font-weight: bold;
+  text-align: center; /* Center the text within each menu item */
+  display: block; /* Ensure each menu item takes the full width */
+  transition: font-style 0.3s ease; /* Add transition for font style change */
+}
+
+.sticky-menu a:hover,
+.sticky-menu a:active {
+  font-style: italic; /* Make the text italic on hover and click */
+}
+
+/* Add hover styles as needed */
