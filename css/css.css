@@ -155,10 +155,4 @@ body {
   display: block; /* Ensure each menu item takes the full width */
   transition: font-style 0.3s ease; /* Add transition for font style change */
 }
-
-.sticky-menu a:hover,
-.sticky-menu a:active {
-  font-style: italic; /* Make the text italic on hover and click */
-}
-
 /* Add hover styles as needed */
