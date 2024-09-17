@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Line</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        svg {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <svg width="800" height="200">
+        <linearGradient id="rainbow" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#FF0000" />
+            <stop offset="14.3%" stop-color="#FF7F00" />
+            <stop offset="28.6%" stop-color="#FFFF00" />
+            <stop offset="42.9%" stop-color="#00FF00" />
+            <stop offset="57.2%" stop-color="#0000FF" />
+            <stop offset="71.5%" stop-color="#4B0082" />
+            <stop offset="85.8%" stop-color="#EE82EE" />
+        </linearGradient>
+        <line x1="0" y1="100" x2="800" y2="100" stroke="url(#rainbow)" stroke-width="20" />
+    </svg>
+</body>
+</html>

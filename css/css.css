@@ -2,13 +2,29 @@
     text-align: center;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  /*width: 100%; font-size:100%*/
+}
+
+#canvas {
+  /* background-color: #333; */
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Other canvas styles go here */
+}
+
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ensure the container takes up at least the full viewport height */
-  margin: 10px;
+  padding: 40px 5%;
 }
 
 body {
@@ -17,12 +33,7 @@ body {
   align-items: center;
   margin: 0;
 }
-.logo {
-  text-align: center;
-  color: white;
-  font-family: Arial, sans-serif;
-  margin-bottom: 40px; /* Add a large gap below the logo */
-}
+
 .roof {
   width: 0;
   height: 0;
@@ -31,19 +42,21 @@ body {
   border-bottom: 100px solid white;
   margin: 0 auto;
 }
+.logo {
+  text-align: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding-bottom: 30%;
+}
 .company-name {
   font-size: 24px;
   font-weight: bold;
-  margin-top: 20px;
+  padding-top: 21px;
 }
 .tagline {
   font-size: 16px;
   font-style: italic;
   margin-bottom: 20px;
-}
-
-.container {
-  padding: 40px 5%;
 }
 
 .heading-text {
