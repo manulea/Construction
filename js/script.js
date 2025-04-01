@@ -4,7 +4,13 @@ const photoWall = document.querySelector(".photo-wall-container");
 
 // Add stars that follow the mouse cursor
 document.addEventListener("mousemove", (event) => {
-    const starsContainer = document.querySelector(".stars");
+    // Ensure the stars container exists
+    let starsContainer = document.querySelector(".stars");
+    if (!starsContainer) {
+        starsContainer = document.createElement("div");
+        starsContainer.classList.add("stars");
+        document.body.appendChild(starsContainer); // Add the container to the body
+    }
 
     // Create a new star
     const star = document.createElement("div");
@@ -20,16 +26,6 @@ document.addEventListener("mousemove", (event) => {
     // Add the star to the container and remove it after 2 seconds
     starsContainer.appendChild(star);
     setTimeout(() => star.remove(), 2000);
-});
-
-// Add a click event listener to the body for background flash effect
-document.body.addEventListener("click", () => {
-    document.body.classList.add("background-flash");
-
-    // Remove the class after the animation ends
-    setTimeout(() => {
-        document.body.classList.remove("background-flash");
-    }, 2300); // 0.8s transition to white, 1s hold, 0.5s transition back = 2.3s total
 });
 
 // Add lightning effect on click
@@ -57,6 +53,27 @@ document.addEventListener("click", (event) => {
     }
 });
 
+// Load saved shapes from local storage
+const savedJigsawShapes = JSON.parse(localStorage.getItem("jigsawShapes")) || [];
+
+// Add event listener to the "Save Jigsaw Shapes" button
+document.getElementById("save-shapes").addEventListener("click", () => {
+    // Convert the saved shapes array to a JSON string
+    const shapesJSON = JSON.stringify(savedJigsawShapes, null, 2); // Pretty-print with 2 spaces
+
+    // Create a Blob object with the JSON data
+    const blob = new Blob([shapesJSON], { type: "application/json" });
+
+    // Create a temporary anchor element to trigger the download
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "jigsaw_shapes.json"; // File name for the download
+    a.click(); // Trigger the download
+
+    // Clean up the URL object
+    URL.revokeObjectURL(a.href);
+});
+
 // Add jigsaw piece effect on click
 document.addEventListener("click", (event) => {
     const jigsaw = document.createElement("div");
@@ -64,13 +81,28 @@ document.addEventListener("click", (event) => {
 
     // Position the jigsaw piece at the mouse click location
     const size = 100; // Size of the jigsaw piece
-    jigsaw.style.left = `${event.clientX - size / 2}px`; // Center horizontally
-    jigsaw.style.top = `${event.clientY - size / 2}px`; // Center vertically
-    jigsaw.style.clipPath = generateRandomShape(); // Generate a random shape
+    jigsaw.style.left = `${event.pageX - size / 2}px`; // Use pageX for horizontal position
+    jigsaw.style.top = `${event.pageY - size / 2}px`; // Use pageY for vertical position
+
+    // Generate a random gradient for the jigsaw piece
+    const randomColor1 = `hsl(${Math.random() * 360}, 100%, 50%)`; // Random vibrant color
+    const randomColor2 = `hsl(${Math.random() * 360}, 100%, 50%)`; // Another random vibrant color
+    jigsaw.style.background = `linear-gradient(45deg, ${randomColor1}, ${randomColor2})`;
+
+    // Generate a random shape for the jigsaw piece
+    const shape = generateRandomShape();
+    jigsaw.style.clipPath = shape;
+
+    // Save the shape to the array and local storage
+    savedJigsawShapes.push(shape);
+    localStorage.setItem("jigsawShapes", JSON.stringify(savedJigsawShapes));
 
     // Add the jigsaw piece to the body and remove it after 1 second
     document.body.appendChild(jigsaw);
     setTimeout(() => jigsaw.remove(), 1000);
+
+    // Log the saved shapes to the console
+    console.log("Saved Jigsaw Shapes:", savedJigsawShapes);
 });
 
 // Function to generate a random clip-path polygon
@@ -94,39 +126,6 @@ document.querySelectorAll(".photo-wall img").forEach((img) => {
         img.style.left = ""; // Reset position when the cursor leaves
         img.style.top = ""; // Reset position when the cursor leaves
     });
-});
-
-// Add dynamic background gradient for the gallery
-const gallery = document.querySelector("#gallery");
-gallery.addEventListener("mousemove", (event) => {
-    const { clientX, clientY, currentTarget } = event;
-    const { width, height, left, top } = currentTarget.getBoundingClientRect();
-    const xPercent = ((clientX - left) / width) * 100;
-    const yPercent = ((clientY - top) / height) * 100;
-
-    // Update the background gradient based on the cursor's position
-    gallery.style.background = `radial-gradient(circle at ${xPercent}% ${yPercent}%, #ff7eb3, #ff758c, #ff6a6a)`;
-});
-
-// Add dynamic background gradient for the photo wall
-let fadeTimeout;
-photoWall.addEventListener("mousemove", (event) => {
-    const { clientX, clientY, currentTarget } = event;
-    const { width, height, left, top } = currentTarget.getBoundingClientRect();
-    const xPercent = ((clientX - left) / width) * 100;
-    const yPercent = ((clientY - top) / height) * 100;
-
-    // Update the background gradient based on the cursor's position
-    photoWall.style.background = `radial-gradient(circle at ${xPercent}% ${yPercent}%, #ff7eb3, #ff758c, #ff6a6a)`;
-
-    // Clear any existing fade timeout
-    clearTimeout(fadeTimeout);
-
-    // Set a timeout to fade the gradient when the cursor stops moving
-    fadeTimeout = setTimeout(() => {
-        photoWall.style.transition = "background 0.8s ease"; // Smooth fade transition
-        photoWall.style.background = `radial-gradient(circle at ${xPercent}% ${yPercent}%, white, #ff758c, #ff7eb3)`;
-    }, 300); // 300ms delay before fading
 });
 
 // Function to randomly swap two images in the active set

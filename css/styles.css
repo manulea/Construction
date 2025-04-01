@@ -4,60 +4,21 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     color: white;
+    background-color: #2c0447;
     overflow-x: hidden; /* Prevent horizontal scrollbars */
     animation: background-color-change 30s infinite; /* Infinite animation for background color */
     transition: background-color 0.5s ease; /* Smooth transition for background changes */
 }
 
-/* Keyframes for Background Color Transition */
-@keyframes background-color-change {
-    0% {
-        background-color: #250228; /* Pink */
-    }
-    25% {
-        background-color: #4a074f; /* Light Red */
-    }
-    50% {
-        background-color: #7d0f85; /* Red */
-    }
-    75% {
-        background-color: #9816a1; /* Light Red */
-    }
-    100% {
-        background-color: #ce1eda; /* Pink (loop back to start) */
-    }
-}
-
-/* Flash Effect on Click */
-body.background-flash {
-    animation: none; /* Stop the default background animation */
-    background-color: white; /* Transition to white */
-    transition: background-color 0.8s ease; /* Gradual transition to white */
-}
-
-body.background-flash::after {
-    content: "";
-    animation: flash-back 1.5s ease forwards;
-}
-
-/* Keyframes for Returning to Original Color */
-@keyframes flash-back {
-    0% {
-        background-color: white; /* Hold white */
-    }
-    100% {
-        background-color: #250228; /* Return to the original color */
-    }
-}
 
 /* Header Styling */
 header {
+    z-index: 9000; /* Ensure it appears above all other elements */
     position: relative;
     width: 100%; /* Full width of the page */
     text-align: center; /* Center the logo and navigation */
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
     padding: 10px 0; /* Add vertical spacing */
-    z-index: 10; /* Ensure it appears above other elements */
 }
 
 /* Logo Styling */
@@ -67,6 +28,7 @@ header .logo {
     height: auto; /* Maintain aspect ratio */
     opacity: 0.8; /* Make the logo semi-transparent */
     pointer-events: none; /* Prevent interaction with the logo */
+    z-index: 7000;
 }
 
 /* Navigation Styling */
@@ -75,10 +37,11 @@ header nav {
     top: 0; /* Align it to the top */
     left: 0; /* Align it to the left */
     width: 100%; /* Make it span the full width of the page */
-    z-index: 1000; /* Ensure it appears above other elements */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
     backdrop-filter: blur(5px); /* Optional: Add a frosted glass effect */
     padding: 10px 0; /* Add vertical spacing */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    pointer-events: auto; /* Ensure it is clickable */
 }
 
 /* Navigation List */
@@ -90,33 +53,30 @@ header nav ul {
     margin: 0; /* Remove default margin */
 }
 
-/* Navigation Items */
-header nav ul li {
-    margin: 0 15px; /* Add spacing between menu items */
-}
-
 /* Navigation Links */
 header nav ul li a {
     text-decoration: none; /* Remove underline from links */
-    color: white; /* Set link text color */
+    color: white; /* Default text color */
     padding: 10px 15px; /* Add padding for clickable area */
     display: block; /* Make the link a block element */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-weight: normal; /* Default font weight */
+    transition: color 0.3s ease, text-shadow 0.3s ease, font-weight 0.3s ease; /* Smooth transition for hover effects */
 }
 
 /* Hover Effect for Links */
 header nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Lighten background on hover */
-    border-radius: 5px; /* Add rounded corners on hover */
+    color: yellow; /* Change text color to yellow */
+    font-weight: bold; /* Make the text bold */
+    text-shadow: 0 0 5px yellow, 0 0 10px yellow, 0 0 20px yellow; /* Add glowing effect */
 }
 
 /* Stars */
 .stars {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -1; /* Place it behind all content */
+    z-index: 8000; /* Place it behind all content */
 }
 
 .star {
@@ -159,7 +119,7 @@ header nav ul li a:hover {
     height: 100vh; /* Full screen height */
     background: linear-gradient(to bottom, yellow, white); /* Fade from yellow to white */
     box-shadow: 0 0 20px yellow, 0 0 40px white; /* Glow effect */
-    z-index: 1000; /* Ensure it appears above everything */
+    z-index: 9000; /* Ensure it appears above everything */
     transform-origin: top center; /* Rotate from the top */
     animation: strike 0.5s ease-out forwards;
     pointer-events: none; /* Prevent interaction with the lightning */
@@ -182,10 +142,10 @@ header nav ul li a:hover {
     position: absolute;
     width: 100px; /* Size of the jigsaw piece */
     height: 100px;
-    background-color: green; /* Green color */
-    z-index: 1000; /* Ensure it appears above everything */
+    z-index: 9000; /* Ensure it appears above everything, including the gallery */
     pointer-events: none; /* Prevent interaction with the jigsaw piece */
     animation: fade-out 1s ease-out forwards; /* Fade-out animation */
+    border-radius: 10px; /* Optional: Add rounded corners for a polished look */
 }
 
 /* Fade-Out Animation */
@@ -202,10 +162,14 @@ header nav ul li a:hover {
 
 /* Gallery Section */
 #gallery {
+    position: relative;
+    z-index: 8000;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
     text-align: center;
-    transition: background 0.2s ease; /* Smooth transition for background changes */
+    background-color: rgba(0, 0, 0, 0.7); /* Default background color */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    transition: background-color 0.5s ease; /* Smooth transition for background changes */
 }
 
 /* Rainbow Effect for "Our Work" Heading */
@@ -247,7 +211,6 @@ header nav ul li a:hover {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Uniform grid with fixed sizes */
     gap: 10px; /* Spacing between images */
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black background for the photo wall */
     transition: background 0.2s ease; /* Smooth transition for background changes */
 }
 
@@ -354,4 +317,111 @@ header nav ul li a:hover {
     box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.8), 0 0 40px 10px rgba(255, 255, 255, 0.6); /* Holy glow effect */
     animation: buzz 0.2s infinite; /* Add buzzing animation */
     cursor: pointer;
+}
+
+#save-shapes {
+    position: fixed; /* Keep the button fixed on the screen */
+    bottom: 20px; /* Position it at the bottom */
+    right: 20px; /* Position it on the right */
+    z-index: 3000; /* Ensure it appears above all other elements */
+    padding: 10px 20px; /* Add some padding for better appearance */
+    background-color: #4caf50; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+#save-shapes:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Content Container */
+.content-container {
+    max-width: 1200px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding inside the container */
+    box-sizing: border-box; /* Include padding in the element's total width/height */
+}
+
+/* Section Styling */
+.content-container section {
+    margin-bottom: 40px; /* Add spacing between sections */
+}
+
+.content-container section h2 {
+    font-size: 2em; /* Adjust heading size */
+    margin-bottom: 10px; /* Add spacing below the heading */
+    text-align: center; /* Center-align the headings */
+}
+
+.content-container section p {
+    font-size: 1.1em; /* Adjust paragraph font size */
+    line-height: 1.6; /* Improve readability */
+    text-align: justify; /* Justify the text */
+}
+
+/* Contact Section */
+.contact-section {
+    position: relative; /* Ensure it is positioned relative to the document flow */
+    z-index: 9999; /* Set a very high z-index to ensure it appears above everything */
+    background-color: #f5f5f5; /* Light grey background */
+    padding: 40px 20px; /* Add padding for spacing */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 40px auto; /* Center the section with spacing */
+    max-width: 800px; /* Limit the width for better readability */
+    text-align: center; /* Center-align the content */
+}
+
+.contact-section h2 {
+    font-size: 2.5em; /* Larger heading size */
+    margin-bottom: 20px; /* Add spacing below the heading */
+    color: #333; /* Darker text color for contrast */
+}
+
+.contact-section p {
+    font-size: 1.1em; /* Adjust paragraph font size */
+    line-height: 1.6; /* Improve readability */
+    color: #555; /* Slightly lighter text color */
+    margin-bottom: 20px; /* Add spacing below paragraphs */
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
+    gap: 15px; /* Add spacing between form elements */
+}
+
+.contact-form label {
+    font-size: 1em;
+    color: #333;
+    text-align: left;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%; /* Full width */
+    padding: 10px; /* Add padding inside inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1em; /* Adjust font size */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.contact-form button {
+    background-color: #4caf50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Add padding */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1.1em; /* Slightly larger font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.contact-form button:hover {
+    background-color: #45a049; /* Darker green on hover */
 }
