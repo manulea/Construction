@@ -194,3 +194,24 @@ rightArrow.addEventListener("click", () => {
     currentSetIndex = (currentSetIndex + 1) % sets.length; // Move to the next set, loop back to the start
     showSet(currentSetIndex); // Update the visible set
 });
+
+// Select the navigation bar and logo
+const navbar = document.querySelector("header nav");
+const logo = document.querySelector("header .logo");
+
+// Add a scroll event listener
+window.addEventListener("scroll", () => {
+    // Get the bottom position of the logo relative to the viewport
+    const logoBottom = logo.getBoundingClientRect().bottom;
+
+    // Check if the logo is out of view
+    if (logoBottom <= 0) {
+        // Fade out the navigation bar
+        navbar.style.opacity = "0";
+        navbar.style.pointerEvents = "none"; // Disable interaction while hidden
+    } else {
+        // Fade in the navigation bar
+        navbar.style.opacity = "1";
+        navbar.style.pointerEvents = "auto"; // Enable interaction
+    }
+});

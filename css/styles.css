@@ -425,3 +425,7 @@ header nav ul li a:hover {
 .contact-form button:hover {
     background-color: #45a049; /* Darker green on hover */
 }
+
+header nav {
+    transition: opacity 0.5s ease; /* Smooth fade effect */
+}
