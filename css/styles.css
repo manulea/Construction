@@ -1,0 +1,271 @@
+/* Style for the navigation bar */
+header nav ul {
+    list-style: none; /* Remove bullet points */
+    display: flex; /* Arrange items in a row */
+    justify-content: center; /* Center the items horizontally */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    background-color: #333; /* Add a background color */
+}
+
+header nav ul li {
+    margin: 0 15px; /* Add spacing between menu items */
+}
+
+header nav ul li a {
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* Set link text color */
+    padding: 10px 15px; /* Add padding for clickable area */
+    display: block; /* Make the link a block element */
+}
+
+header nav ul li a:hover {
+    background-color: #555; /* Change background color on hover */
+    border-radius: 5px; /* Add rounded corners on hover */
+}
+
+/* General reset for body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: black; /* Default background */
+    color: white;
+    overflow-x: hidden; /* Prevent scrollbars from appearing */
+    transition: background 3s ease; /* Smooth transition for background changes */
+}
+
+/* Stars container */
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Place it behind all content */
+}
+
+/* Single star */
+.star {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    clip-path: polygon(
+        50% 0%, 
+        61% 35%, 
+        98% 35%, 
+        68% 57%, 
+        79% 91%, 
+        50% 70%, 
+        21% 91%, 
+        32% 57%, 
+        2% 35%, 
+        39% 35%
+    ); /* Star shape */
+    animation: twinkle 2s infinite ease-in-out;
+}
+
+/* Twinkling animation */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2); /* Slightly enlarge the star */
+    }
+}
+
+/* Dynamically created stars */
+.star {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    clip-path: polygon(
+        50% 0%, 
+        61% 35%, 
+        98% 35%, 
+        68% 57%, 
+        79% 91%, 
+        50% 70%, 
+        21% 91%, 
+        32% 57%, 
+        2% 35%, 
+        39% 35%
+    ); /* Star shape */
+    animation: twinkle 2s infinite ease-in-out;
+    pointer-events: none; /* Prevent interaction with stars */
+}
+
+/* Lightning bolt */
+.lightning {
+    position: absolute;
+    width: 5px;
+    height: 100px;
+    background: linear-gradient(to bottom, white, yellow);
+    box-shadow: 0 0 10px white;
+    z-index: 1000; /* Ensure it appears above everything */
+    animation: strike 0.5s ease-out forwards;
+    pointer-events: none; /* Prevent interaction with the lightning */
+}
+
+/* Lightning strike animation */
+@keyframes strike {
+    0% {
+        opacity: 1;
+        transform: scaleY(0) translateY(-100px); /* Start small and above the screen */
+    }
+    50% {
+        opacity: 1;
+        transform: scaleY(1) translateY(0); /* Grow to full size */
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(1) translateY(100px); /* Fade out and move down */
+    }
+}
+
+/* Single large lightning bolt */
+.lightning-segment {
+    position: absolute;
+    width: 10px; /* Width of the lightning bolt */
+    height: 100vh; /* Full screen height */
+    background: linear-gradient(to bottom, yellow, white); /* Fade from yellow to white */
+    box-shadow: 0 0 20px yellow, 0 0 40px white; /* Glow effect */
+    z-index: 1000; /* Ensure it appears above everything */
+    transform-origin: top center; /* Rotate from the top */
+    animation: strike 0.5s ease-out forwards;
+    pointer-events: none; /* Prevent interaction with the lightning */
+}
+
+/* Lightning strike animation */
+@keyframes strike {
+    0% {
+        opacity: 1;
+        transform: scaleY(0); /* Start small */
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(1); /* Grow to full size and fade out */
+    }
+}
+
+/* Jigsaw piece */
+.jigsaw-piece {
+    position: absolute;
+    width: 100px; /* Size of the jigsaw piece */
+    height: 100px;
+    background-color: green; /* Green color */
+    z-index: 1000; /* Ensure it appears above everything */
+    pointer-events: none; /* Prevent interaction with the jigsaw piece */
+    animation: fade-out 1s ease-out forwards; /* Fade-out animation */
+}
+
+/* Fade-out animation */
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.2); /* Slightly enlarge as it fades */
+    }
+}
+
+/* Gallery Section */
+#gallery {
+    padding: 20px;
+    background-color: black;
+    text-align: center;
+}
+
+/* Rainbow Effect for "Our Work" Heading */
+#gallery h2 {
+    font-size: 2.5em;
+    color: white; /* Fallback color */
+    text-align: center;
+    animation: rainbow 5s infinite linear, glisten 1.5s infinite ease-in-out;
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Makes the text transparent to show the gradient */
+    position: relative;
+}
+
+/* Rainbow Animation */
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Glisten Animation */
+@keyframes glisten {
+    0%, 100% {
+        text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
+    }
+    50% {
+        text-shadow: 0 0 10px yellow, 0 0 20px yellow, 0 0 30px yellow;
+    }
+}
+
+/* Photo Gallery */
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap; /* Allow images to wrap to the next line */
+    justify-content: center; /* Center the images */
+    gap: 15px; /* Add spacing between images */
+}
+
+.photo-gallery img {
+    display: block;
+    width: auto; /* Keep original width */
+    height: auto; /* Keep original height */
+    max-width: 200px; /* Set a maximum width for smaller screens */
+    max-height: 200px; /* Set a maximum height for smaller screens */
+    object-fit: cover; /* Ensure images fit within their container */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    cursor: pointer;
+}
+
+/* Hover Effect: Magnifying Glass */
+.photo-gallery img:hover {
+    transform: scale(1.5); /* Enlarge the image */
+    z-index: 10; /* Bring the hovered image to the front */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Add a shadow for emphasis */
+}
+
+/* Photo Wall */
+.photo-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Uniform grid with fixed sizes */
+    gap: 10px; /* Spacing between images */
+    padding: 20px;
+    background-color: #f0f0f0; /* Light background for the wall */
+}
+
+.photo-wall img {
+    width: 100%; /* Make images fill their grid cell */
+    height: 150px; /* Set a uniform height for all images */
+    object-fit: cover; /* Ensure images fit nicely within the grid */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    cursor: pointer;
+}
+
+/* Hover Effect: Slightly Enlarge the Image */
+.photo-wall img:hover {
+    transform: scale(1.1); /* Slightly enlarge the image */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add a shadow for emphasis */
+}
+
+#gallery {
+    transition: background 0.2s ease; /* Smooth transition for background changes */
+}
