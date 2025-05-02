@@ -1,4 +1,15 @@
 /* General Styles */
+
+.about-us-image {
+    display: block;
+    margin: 0 auto 20px; /* Center the image and add spacing below */
+    width: 150px; /* Set a fixed width for the profile picture */
+    height: 150px; /* Set a fixed height for the profile picture */
+    object-fit: cover; /* Ensure the image maintains aspect ratio and fits within the dimensions */
+    border-radius: 50%; /* Make the image circular */
+    border: 2px solid #ccc; /* Optional: Add a border around the image */
+}
+
 body {
     margin: 0;
     padding: 0;
